@@ -35,10 +35,16 @@ const deleteUser = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const verifyEmail = catchAsync(async (req, res) => {
+  await userService.verifyEmail(parseInt(req.params.userId));
+  res.status(httpStatus.NO_CONTENT).send();
+})
+
 export default {
   createUser,
   getUsers,
   getUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  verifyEmail
 };

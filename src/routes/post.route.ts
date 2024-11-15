@@ -14,7 +14,7 @@ router
 router
   .route('/:postId')
   .get(auth('getUsers'), validate(postValidation.getPost), postController.getPost)
-  .patch(auth('manageUsers'), validate(postValidation.updatePost), postController.updatePost)
+  .patch(auth('getUsers'), validate(postValidation.updatePost), postController.updatePost)
   .delete(auth('getUsers'), validate(postValidation.deletePost), postController.deletePost);
 
 export default router;

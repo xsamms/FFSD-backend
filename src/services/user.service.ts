@@ -152,6 +152,18 @@ const deleteUserById = async (userId: number): Promise<User> => {
   await prisma.user.delete({ where: { id: user.id } });
   return user;
 };
+ 
+const verifyEmail = async (id: number): Promise<User> => {
+  const user = await getUserById(id);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { isEmailVerified: true }
+  });
+  return user;
+};
 
 export default {
   createUser,
@@ -159,5 +171,6 @@ export default {
   getUserById,
   getUserByEmail,
   updateUserById,
-  deleteUserById
+  deleteUserById,
+  verifyEmail
 };

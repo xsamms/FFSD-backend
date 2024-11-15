@@ -17,6 +17,10 @@ router
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
 
+router
+  .route('/:userId/verify/:token')
+  .get(userController.verifyEmail);
+
 export default router;
 
 /**

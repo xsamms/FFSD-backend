@@ -36,9 +36,6 @@ const updatePost = catchAsync(async (req, res) => {
   const user = req.user as User;
   const post = await postService.updatePostById(req.params.postId, req.body);
 
-  if (post?.userId !== user.id || user.role !== 'ADMIN') {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Unauthorized');
-  }
   res.send(post);
 });
 
